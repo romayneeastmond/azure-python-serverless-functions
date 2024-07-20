@@ -19,7 +19,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             start_time_file = time.perf_counter()            
 
             file_type = get_file_extension(file.filename)
-            content, number_of_words, number_of_pages = get_file_content(file, file_type)
+            content, number_of_words, number_of_pages, pages_content = get_file_content(file, file_type)
 
             file_details.append({
                 "filename": file.filename, 
@@ -28,7 +28,8 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
                 "statistics": {
                     "words": number_of_words,
                     "pages": number_of_pages
-                }
+                },
+                "pages": pages_content
             })
 
             stop_time_file = time.perf_counter()
