@@ -14,6 +14,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
 
     content = req_body.get('content')
     clauses = req_body.get('clauses')
+    temperature = req_body.get('similarity')
 
     if not content or not clauses:
         return func.HttpResponse(
@@ -21,6 +22,9 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             status_code=204,
             mimetype="application/json"
         )
+        
+    if not temperature:
+        temperature = 0.25
     
     vectors, features, chunks = vectorize_text(content, 1000, 100)
     
@@ -37,7 +41,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         result = result.replace("   ", " ").replace("  ", " ")
         result = find_and_substring(result)
         
-        if similarity != 0.0 and similarity > 0.55:
+        if similarity != 0.0 and similarity > temperature:
             contents.append({
                 "clause": clause,
                 "similarity": f"{similarity:.4f}"
