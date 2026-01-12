@@ -4,6 +4,7 @@ import json
 import time
 from get_content_from_urls import find_urls
 from get_content_from_urls import get_body_content
+from get_content_from_urls import get_meta_information
 from get_content_from_urls import get_webpage_content
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
@@ -11,6 +12,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
 
     query = req.params.get('query')
+    extract_meta_flag = req.params.get('meta', 'false').lower() == 'true'
 
     if not query:
         return func.HttpResponse(
@@ -31,15 +33,20 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
 
             if body_content is None:
                 body_content = ""
-            
-            contents.append({
-                "url": url,
-                "content": body_content,
-                "statistics": {
-                    "words": len(body_content.split()),
-                    "pages": -1
+                
+            item = {
+                'url': url,
+                'content': body_content,
+                'statistics': {
+                    'words': len(body_content.split()),
+                    'pages': -1
                 }
-            })
+            }                
+                
+            if extract_meta_flag:
+                item['meta'] = get_meta_information(content)
+            
+            contents.append(item)
         else:
             logging.error(f"Failed to download content from {url}")
 

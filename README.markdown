@@ -11,12 +11,14 @@ A collection of Azure servless endpoints, written in Python, used in conjunction
 | GetFilesContents             | Accepts files in PDF, Word, text, and markdown format. Returns the document name, file type, content, word count, and pages count (only for PDFs).                                                                                                                                           |
 | GetResultsFromContent        | Performs a vectorized search using cosine similarity on the distance between the given prompt and the given content. Used as a way of locating semantic meaning, usually from a scraped website or content of a document. Only results higher than 0 are returned.                           |
 | GetResultsFromContentClauses | Performs a vectorized search using cosine similarity on the distance between a list of clauses (separated each on a new line) and the given content. Used as a way of locating if clauses are contained in content. Only results higher than 0 and greater than 25% similarity are returned. |
+| GetSummarizationFromContent  | Summarizes the given content based on chunking and returns the completed summary.                                                                                                                                                                                                            |
+| GetTranslationFromContent    | Translate the given content based on chunking and returns the completed summary.                                                                                                                                                                                                             |
 | GetWordFromHtml              | Accepts HTML content and returns the byte array of a Word Document.                                                                                                                                                                                                                          |
 
 
 ## Debugging Locally
 
-To debug locally install [Azure Functions Core](https://learn.microsoft.com/en-us/azure/azure-functions/functions-run-local) and press F5 within Visual Studio Code to run the functions against http://localhost:7071
+To debug locally install [Azure Functions Core](https://learn.microsoft.com/en-us/azure/azure-functions/functions-run-local) and press F5 within Visual Studio Code to run the functions against http://localhost:7071 or run 'func start' from the Terminal.
 
 ## Copyright and Ownership
 

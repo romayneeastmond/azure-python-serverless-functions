@@ -30,6 +30,33 @@ def get_body_content(content):
   else:
     return content
 
+def get_meta_information(html):
+    soup = BeautifulSoup(html, 'html.parser')
+
+    description = None
+    image = None
+
+    desc_tag = soup.find('meta', attrs={'name': 'description'})
+    if desc_tag and desc_tag.get('content'):
+        description = desc_tag.get('content')
+
+    og_desc = soup.find('meta', property='og:description')
+    if og_desc and og_desc.get('content'):
+        description = og_desc.get('content')
+
+    og_image = soup.find('meta', property='og:image')
+    if og_image and og_image.get('content'):
+        image = og_image.get('content')
+
+    meta_image = soup.find('meta', attrs={'name': 'image'})
+    if not image and meta_image and meta_image.get('content'):
+        image = meta_image.get('content')
+
+    return {
+        'description': description,
+        'image': image
+    }
+
 def get_webpage_content(url):
     if not url.startswith("http://") and not url.startswith("https://"):
         url = "https://" + url
