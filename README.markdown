@@ -6,6 +6,7 @@ A collection of Azure servless endpoints, written in Python, used in conjunction
 
 | Name                         | Description                                                                                                                                                                                                                                                                                  |
 |------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| GetComparisonFromContent     | Compares documents based on similarities and differences.                                                                                                                                                                                                                                    |
 | GetContentFromUrls           | Parses any valid website URL from the given prompt and returns scraped content. First attempts to locate the body tag and removes header, footer, and nav content. If no body is located, returns the entire webpage content.                                                                |
 | GetDocumentFromContent       | Accepts plain content and returns the byte array of a text file.                                                                                                                                                                                                                             |
 | GetFilesContents             | Accepts files in PDF, Word, text, and markdown format. Returns the document name, file type, content, word count, and pages count (only for PDFs).                                                                                                                                           |
@@ -14,7 +15,6 @@ A collection of Azure servless endpoints, written in Python, used in conjunction
 | GetSummarizationFromContent  | Summarizes the given content based on chunking and returns the completed summary.                                                                                                                                                                                                            |
 | GetTranslationFromContent    | Translate the given content based on chunking and returns the completed summary.                                                                                                                                                                                                             |
 | GetWordFromHtml              | Accepts HTML content and returns the byte array of a Word Document.                                                                                                                                                                                                                          |
-
 
 ## Debugging Locally
 
