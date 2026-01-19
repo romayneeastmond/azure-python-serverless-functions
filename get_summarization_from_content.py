@@ -45,3 +45,30 @@ def summarize_chunk(text):
     response.raise_for_status()
 
     return response.json()["choices"][0]["message"]["content"]
+
+def extract_from_chunk(query, text):
+    url = f"{ENDPOINT}/openai/deployments/{DEPLOYMENT}/chat/completions?api-version={API_VERSION}"
+
+    headers = {
+        "Content-Type": "application/json",
+        "api-key": API_KEY
+    }
+
+    payload = {
+        "messages": [
+            {
+                "role": "system",
+                "content": "You are a professional extraction engine."
+            },
+            {
+                "role": "user",
+                "content": f"{query}: \n\n{text}"
+            }
+        ],
+        "temperature": 0.2
+    }
+
+    response = requests.post(url, headers=headers, json=payload)
+    response.raise_for_status()
+
+    return response.json()["choices"][0]["message"]["content"]
