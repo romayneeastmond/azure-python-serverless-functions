@@ -9,3 +9,6 @@ PyPDF2
 python-docx
 scikit-learn
 requests
+requests
+reportlab
+python-pptx
